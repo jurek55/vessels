@@ -1,0 +1,68 @@
+.picture {
+    position: absolute;
+    top: 0;
+    left: 0px;
+    width: 500px;
+    height: 290px;
+    cursor: pointer;
+    transition: .5s;
+    
+}
+.picture-hidden {
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    width: 500px;
+    height: 290px;
+    transform: translateX(550px);
+    transition: .5s;
+  
+}
+.picture-wraper {
+    margin: 0 auto;
+    position: relative;
+    width: 500px;
+    height: 300px;
+    overflow: hidden;
+}
+
+/* .fas {
+    font-size: 100px;
+    color: green;
+    cursor: pointer;
+} */
+.min {
+    font-size: 100px;
+    color: grey;
+    cursor: pointer;
+}
+.arrows {
+    margin: 0 auto;
+    display: flex;
+    width: 500px;
+    justify-content: space-around;
+}
+button {
+    display: block;
+    flex-basis: 60%;
+    cursor: pointer;
+    font-size: 20px;
+    text-transform: uppercase;
+    height: 50px;
+    align-self: center;
+}
+h1 {
+    text-transform: uppercase;
+    text-align: center;
+}
+.left-arrow, .right-arrow {
+    font-size: 100px;
+    color: green;
+    cursor: pointer;
+}
+.left-arrow-min {
+    font-size: 100px;
+    color: lightgrey;
+    cursor: default;
+}
+
