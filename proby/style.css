@@ -1,0 +1,20 @@
+div.over {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto; 
+}
+div.first {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background-color: yellow;
+    opacity: 1;
+}
+div.second {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background-color: green;
+    opacity: .3c;
+}
