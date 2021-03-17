@@ -6,13 +6,13 @@ class App extends React.Component {
     goodAnswer: false,
     numbers: [],
     question: 0,
-    mode: 0,
+    mode: '',
     class: {
         color1: 'lightgrey',
         color2: 'lightgrey',
         colopr3: 'lightgrey'
-    }
-    
+    },
+    describe: false
   }
 
   componentDidMount(){
@@ -132,28 +132,42 @@ drawQuestion = () => {
 aplicationMode = (event) => {
   if (event.target.name === 'learningMode') {
     this.setState({
-      mode: 1
+      mode: false
     })
   }
   if (event.target.name === 'testMode') {
     this.setState({
-      mode: 2
+      mode: true
     })
   }
+}
+
+handleDescribe =() => {
+  this.setState({
+    describe: !this.state.describe
+  })
+}
+
+handleChangeMode = () => {
+  
+  
+    this.setState({mode: !this.state.mode})
 }
   render() {
    
     return (
       <React.Fragment>
-        <header>
-          <header className='central'>światła i znaki statków</header>
-         {/*  {this.state.mode === 1 && <header className='right'><ChooseAnyPicture click={this.handleOnClickArrows}/></header>} */}
+        <header className='titel'>
+        <header className='central'>światła i znaki statków</header>
+        {this.state.mode === false && <div className="mode">tryb prezentacji</div>}
+        {this.state.mode === true && <div className="mode">tryb nauki</div>}
+         
         </header>
-        {this.state.mode === 0 && <Dashboard aplicationMode = {this.aplicationMode}/>}
-        {this.state.mode === 1 && <LearningMode counter={this.state.counter} active={this.state.active} click={this.handleOnClickArrows} button={this.handleButton}/>}
-        {this.state.mode === 2 && <TestMode numbers = {this.state.numbers} handleOnClickAnswer = {this.handleOnClickAnswer} questionPicture={this.drawQuestion} picture={this.state.question} class={this.state.class}/>}
+        {this.state.mode === '' && <Dashboard aplicationMode = {this.aplicationMode}/>}
+        {this.state.mode === false && <LearningMode counter={this.state.counter} changeMode = {this.handleChangeMode} mode={this.state.mode} active={this.state.active} click={this.handleOnClickArrows} button={this.handleButton}/>}
+        {this.state.mode === true && <TestMode numbers = {this.state.numbers} /* mode={this.state.mode} */ changeMode = {this.handleChangeMode} active={this.state.active} handleOnClickAnswer = {this.handleOnClickAnswer} questionPicture={this.drawQuestion} picture={this.state.question} class={this.state.class} answer={this.state.goodAnswer} button={this.handleButton} describe={this.handleDescribe} switch = {this.state.describe}/>}
         <footer>
-          {this.state.mode === 1 && <header className='right'><ChooseAnyPicture click={this.handleOnClickArrows}/></header>}
+          {this.state.mode === false && <header className='right'><ChooseAnyPicture click={this.handleOnClickArrows}/></header>}
         </footer>
       </React.Fragment>
     );
@@ -194,7 +208,7 @@ const LearningMode = (props) => {
 
     <div className='arrows'>
       <div className={props.counter === 1 ? 'left-arrow-min' : 'left-arrow'} onClick={props.click}><i className ="fas fa-caret-left"></i></div>
-      <button className='button' onClick={props.button}>{!props.active ? 'tryb nauki' : 'tryb testowy'}</button>
+      <button className='button' onClick={props.changeMode}>przełącz tryb</button>
       
       <div className={props.counter === 120 ? 'right-arrow-max' : 'right-arrow'} onClick={props.click}><i className ="fas fa-caret-right"></i></div>
     </div>
@@ -213,21 +227,21 @@ const TestMode = (props) => {
       tabDescribes[i]=`./images/opisy-500px-unnumbered/${i+1}.jpg`;
     }
   return(
+    
   <div className="wrapper">
+   
   <div>
     <h1 className='mode-title'></h1>
 
     <div className="picture-wraper">      
-     
-      <div className={!props.active ? 'picture' : 'picture-hidden'}>{props.counter !==0 && <img src={tabPictures[props.counter-1]} alt="aa"/>}</div>
-      <div className={!props.active ? 'picture' : 'picture'}>{props.counter !==0 && <img src={tabDescribes[props.counter-1]} alt="aa"/>}</div>
+    
+      <div className='picture'><img src={tabPictures[props.picture]} alt="aa"/></div>
+      {!props.switch ? <button className='picture-mask' name='mask' onClick={props.describe}>wyświetl opis</button> : <div className='picture'><img src={tabDescribes[props.picture]} alt="aa"/></div>}
+    
     </div>
 
     <div className='arrows'>
-      <div className={props.counter === 1 ? 'left-arrow-min' : 'left-arrow'} onClick={props.click}><i className ="fas fa-caret-left"></i></div>
-      <button className='button' onClick={props.button}>{!props.active ? 'tryb nauki' : 'tryb testowy'}</button>
-      
-      <div className={props.counter === 120 ? 'right-arrow-max' : 'right-arrow'} onClick={props.click}><i className ="fas fa-caret-right"></i></div>
+      <button className='button' onClick={props.changeMode}>przełącz tryb</button>
     </div>
   </div>
   </div>
@@ -263,7 +277,7 @@ const TestMode1 = (props) => {
   const Dashboard = (props) => {
     return (
     <div className='dashboard '>
-        <button name='learningMode' onClick = {props.aplicationMode}>tryb nauki</button><button name='testMode' onClick = {props.aplicationMode}>tryb testowy</button>
+        <button name='learningMode' onClick = {props.aplicationMode}>tryb prezentacji</button><button name='testMode' onClick = {props.aplicationMode}>tryb nauki</button>
     </div>
     )
   }

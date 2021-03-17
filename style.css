@@ -38,6 +38,21 @@ header, footer{
     width: 500px;
     height: 290px;
     transition: .5s;
+    /* filter: blur(4px); */
+}
+
+.picture-mask {
+    /* top: 0;
+    left: 0px; */
+    width: 500px;
+    /*height: 290px; */
+    transition: .5s;
+    font-size: 30px;
+    color: white;
+    text-align: center;
+
+
+    /* filter: blur(4px); */
 }
 .picture-hidden {
     /* top: 0px;
@@ -165,4 +180,17 @@ img.red {
 
 img.green {
     border: green 5px solid;
+}
+.mode {
+    font-size: 20px;
+    flex-basis: 100%;
+    text-align: center;
+}
+.titel {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.central {
+    flex-basis: 100%;
 }
