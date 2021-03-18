@@ -3,33 +3,13 @@ class App extends React.Component {
     counter: 1,
     active: false,
     random: 0,
-    goodAnswer: false,
-    numbers: [],
-    question: 0,
     mode: '',
-    class: {
-        color1: 'lightgrey',
-        color2: 'lightgrey',
-        colopr3: 'lightgrey'
-    },
     describe: false
   }
 
   componentDidMount(){
-    let numbers =[];
     const questionPicture = Math.ceil(Math.random()*120);
-    numbers[0] = questionPicture;
-    while (!numbers[1] || numbers[1] === numbers[0]) {
-      numbers[1] = Math.ceil(Math.random()*120);
-    }
-      numbers[2] = Math.ceil(Math.random()*120);
-    while (numbers[2] === numbers[0] || numbers[2] === numbers[1]) {
-      numbers[2] = Math.ceil(Math.random()*120);
-    }
-    numbers = this.tabMixing(numbers);
-    
     this.setState({
-      numbers,
       question: questionPicture
     })
   }
@@ -51,81 +31,17 @@ class App extends React.Component {
         })
   }
 
-  handleOnClickAnswer = (event) => {
-    const decision = parseInt(event.target.alt);
-    for (let i=1; i<4; i++){
-      if (this.state.numbers[i-1] === decision){
-        
-          if (decision === this.state.question && i===1){
-            this.setState({
-             
-              class: {color1: 'green'}
-            });
-          } else if (decision !== this.state.question && i===1){
-            this.setState({
-             
-              class: {color1: 'red'}
-            });
-          }
-      }
-      if (this.state.numbers[i-1] === decision){
-            
-          if (decision === this.state.question && i===2){
-              this.setState({
-                class: {color2: 'green'}
-              });
-          } else if (decision !== this.state.question && i===2){
-              this.setState({
-                class: {color2: 'red'}
-              });
-            }
-      }
-    if (this.state.numbers[i-1] === decision){
-          
-      if (decision === this.state.question && i===3){
-        this.setState({
-          class: {color3: 'green'}
-        });
-      } else if (decision !== this.state.question && i===3){
-        this.setState({
-          class: {color3: 'red'}
-        });
-      }
-    }
-  }
-}
   handleButton = () => {
     this.setState({
       active: !this.state.active
     })
   }
-  
-  tabMixing = (tab) => {
-    for ( let i = 0; i<tab.length; i++){
-        let j = Math.floor(Math.random()*tab.length);
-        const tempElement = tab[i];
-        tab[i] = tab[j];
-        tab[j] = tempElement;
-    }
-  return tab;
-}
 
 drawQuestion = () => {
-  let numbers =[];
   const questionPicture = Math.ceil(Math.random()*120);
-  numbers[0] = questionPicture;
-  while (!numbers[1] || numbers[1] === numbers[0]) {
-    numbers[1] = Math.ceil(Math.random()*120);
-  }
-  while (!numbers[2] || numbers[2] === numbers[0] || numbers[2] === numbers[1]) {
-    numbers[2] = Math.ceil(Math.random()*120);
-  }
-  numbers = this.tabMixing(numbers);
-  
   this.setState({
-    numbers,
     question: questionPicture,
-    class: {color1: 'lightgrey', color2: 'lightgrey', color3: 'lightgrey'}
+    describe: false
   })
 }
 
@@ -149,8 +65,7 @@ handleDescribe =() => {
 }
 
 handleChangeMode = () => {
-  
-  
+ 
     this.setState({mode: !this.state.mode})
 }
   render() {
@@ -158,16 +73,15 @@ handleChangeMode = () => {
     return (
       <React.Fragment>
         <header className='titel'>
-        <header className='central'>światła i znaki statków</header>
-        {this.state.mode === false && <div className="mode">tryb prezentacji</div>}
-        {this.state.mode === true && <div className="mode">tryb nauki</div>}
-         
+          <header className='central'>światła i znaki statków</header>
+          {this.state.mode === false && <div className="mode">tryb prezentacji</div>}
+          {this.state.mode === true && <div className="mode">tryb nauki</div>}
         </header>
         {this.state.mode === '' && <Dashboard aplicationMode = {this.aplicationMode}/>}
         {this.state.mode === false && <LearningMode counter={this.state.counter} changeMode = {this.handleChangeMode} mode={this.state.mode} active={this.state.active} click={this.handleOnClickArrows} button={this.handleButton}/>}
-        {this.state.mode === true && <TestMode numbers = {this.state.numbers} /* mode={this.state.mode} */ changeMode = {this.handleChangeMode} active={this.state.active} handleOnClickAnswer = {this.handleOnClickAnswer} questionPicture={this.drawQuestion} picture={this.state.question} class={this.state.class} answer={this.state.goodAnswer} button={this.handleButton} describe={this.handleDescribe} switch = {this.state.describe}/>}
+        {this.state.mode === true && <TestMode numbers = {this.state.numbers} changeMode = {this.handleChangeMode} active={this.state.active} handleOnClickAnswer = {this.handleOnClickAnswer} questionPicture={this.drawQuestion} picture={this.state.question} class={this.state.class} button={this.handleButton} describe={this.handleDescribe} switch = {this.state.describe}/>}
         <footer>
-          {this.state.mode === false && <header className='right'><ChooseAnyPicture click={this.handleOnClickArrows}/></header>}
+          {this.state.mode === false ? <header className='right'><ChooseAnyPicture click={this.handleOnClickArrows}/></header> : <NewTask drawQuestion = {this.drawQuestion}/>}
         </footer>
       </React.Fragment>
     );
@@ -247,32 +161,12 @@ const TestMode = (props) => {
   </div>
   )
 }
-//-----------------------------------------------------------tryb testowy_1--------------------------------
-const TestMode1 = (props) => {
-  const tabPictures=[];
-  const tabDescribes=[];
-    for (let i=0; i<120; i++){
-      tabPictures[i]=`./images/obrazy-500px-unnumbered/${i+1}.jpg`;
-      tabDescribes[i]=`./images/opisy-500px-unnumbered/${i+1}.jpg`;
-    }
-  
-    return (
-    <div className="wrapper">
-    <div>
-      {/* <h1 className='mode-title'>tryb testowy</h1> */}
-        <div className="picture-wraper"><img src={tabPictures[props.picture]} alt='' /></div>
-        <div className='answers'>
-          
-            <div className="picture-wraper-answer" onClick = {props.handleOnClickAnswer}><img className={props.class.color1} src={tabDescribes[props.numbers[0]]} alt={props.numbers[0]}/></div>
-            <div className="picture-wraper-answer" onClick = {props.handleOnClickAnswer}>{<img className={props.class.color2} src={tabDescribes[props.numbers[1]]} alt={props.numbers[1]} />}</div>
-            <div className="picture-wraper-answer" onClick = {props.handleOnClickAnswer}><img className={props.class.color3}src={tabDescribes[props.numbers[2]]} alt={props.numbers[2]}/></div>
-            
-        </div>
-        <button onClick={props.questionPicture}>nastepne pytanie</button>
-    </div>
-    </div>
-    );
-  }
+
+const NewTask = (props) => {
+  return (
+    <div className = 'new-task' onClick = {props.drawQuestion}>nowe pytanie</div>
+    )
+}
 
   const Dashboard = (props) => {
     return (
