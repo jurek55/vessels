@@ -2,11 +2,13 @@
     margin: 0;
     padding: 0;
 }
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 body {
     height: 100vh;
     background-color: #ba8455;
+    font-family: 'Lato', sans-serif;
 }
-header, footer{
+header {
     display: flex;
     flex-wrap: wrap;
     background-color:  #456476;
@@ -20,6 +22,19 @@ header, footer{
     text-transform: uppercase;
 }
 
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    background-color:  #456476;
+    height: 10vh;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    min-width: 502px;
+    font-size: 35px;
+   
+}
 .wrapper {
     background-image: url('images/morze.jpg');
     background-position: center;
@@ -39,6 +54,10 @@ header, footer{
     height: 290px;
     transition: .5s;
     /* filter: blur(4px); */
+    font-size: 25px;
+    text-align: justify;
+    color: black;
+    font-family: 'Lato', sans-serif;
 }
 
 .picture-mask {
@@ -47,7 +66,7 @@ header, footer{
     width: 500px;
     /*height: 290px; */
     transition: .5s;
-    font-size: 30px;
+    font-size: 20px;
     color: white;
     text-align: center;
 
@@ -87,7 +106,7 @@ button {
     display: block;
     flex-basis: 60%;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 15px;
     text-transform: uppercase;
     background-color: #456476;
     color: white;
@@ -139,7 +158,7 @@ select {
     background-color: #456476;
 }
 .wybor {
-    font-size: 20px;
+    font-size: 15px;
 }
 .answers{
     margin: 0 auto;
@@ -163,16 +182,22 @@ img.red {
     border: red 5px solid;
 }
 .dashboard {
-    height: 200px;
+    /* height: 200px; */
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-around;
     align-items: center;
+    font-size: 10px;
 }
 .dashboard button {
-    flex-basis: 45%;
-    background-color: green;
-    height: 150px;
+    flex-basis: 25%;
+    margin: 20px;
+    height: 100px;
+    padding: 10px;
+}
+
+.dashboard button p {
+    font-size: 20px;
 }
 .wrap {
     position: relative;
@@ -182,7 +207,7 @@ img.green {
     border: green 5px solid;
 }
 .mode {
-    font-size: 20px;
+    font-size: 18px;
     flex-basis: 100%;
     text-align: center;
 }
@@ -193,8 +218,50 @@ img.green {
 }
 .central {
     flex-basis: 100%;
+    font-size: 20px;
 }
 .new-task {
-    font-size: 20px;
+    font-size: 15px;
     cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+}
+
+.instruction {
+    /* top: 0;
+    left: 0px; */
+    margin: 30px 0;
+    width: 400px;
+    height: 200px;
+    transition: .5s;
+    /* filter: blur(4px); */
+    font-size: 20px;
+    text-align: justify;
+    color: white;
+    font-family: 'Lato', sans-serif;
+    background-color:#456476;
+    padding: 20px 10px;
+    
+}
+.cover {
+    /* top: 0;
+    left: 0px; */
+    margin: 150px 0;
+    width: 500px;
+    height: 290px;
+    transition: .5s;
+    /* filter: blur(4px); */
+    font-size: 25px;
+    text-align: justify;
+    color: black;
+    font-family: 'Lato', sans-serif;
+}
+
+footer p {
+    font-size: 15px;
+}
+
+a {
+    color: white;
+
 }
