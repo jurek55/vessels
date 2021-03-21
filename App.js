@@ -73,6 +73,12 @@ handleChangeMode = () => {
     this.setState({mode})
 }
 
+handleBack = () => {
+  this.setState({
+    mode: '0'
+  })
+}
+
   render() {
    console.log(this.state.mode);
     return (
@@ -86,7 +92,7 @@ handleChangeMode = () => {
         {this.state.mode === '1' && <LearningMode counter={this.state.counter} changeMode = {this.handleChangeMode} mode={this.state.mode} active={this.state.active} click={this.handleOnClickArrows} button={this.handleButton}/>}
         {this.state.mode === '2' && <TestMode numbers = {this.state.numbers} changeMode = {this.handleChangeMode} active={this.state.active} handleOnClickAnswer = {this.handleOnClickAnswer} picture={this.state.question} button={this.handleButton} describe={this.handleDescribe} switch = {this.state.describe}/>}
         <footer>
-         
+          {this.state.mode !== '0' && <Return back={this.handleBack}/>}
           {this.state.mode === '1' && <header className='right'><ChooseAnyPicture click={this.handleOnClickArrows}/></header>}
           {this.state.mode === '2' && <NewTask drawQuestion = {this.drawQuestion}/>}
           <p>&#169; 2021<a href='https://wp.jkunicki.pl' target='_blank'> Jerzy Kunicki</a></p> 
@@ -176,6 +182,11 @@ const NewTask = (props) => {
     )
 }
 
+const Return = (props) => {
+  return (
+    <div className="new-task" onClick={props.back}>Powrót na stronę główną</div>
+  )
+}
   const Dashboard = (props) => {
     return (
       <div className="wrapper">
