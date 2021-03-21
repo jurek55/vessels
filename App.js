@@ -3,8 +3,9 @@ class App extends React.Component {
     counter: 1,
     active: false,
     random: 0,
-    mode: 0,
-    describe: false
+    mode: '0',
+    describe: false,
+    question: ''
   }
 
   componentDidMount(){
@@ -45,17 +46,16 @@ drawQuestion = () => {
   })
 }
 
-aplicationMode = (event) => {
-  if (event.target.name === 'learningMode') {
-    this.setState({
-      mode: 1
-    })
-  }
-  if (event.target.name === 'testMode') {
-    this.setState({
-      mode: 2
-    })
-  }
+aplicationMode1 = () => {
+  this.setState({
+    mode: '1'
+  })
+}
+
+aplicationMode2 = () => {
+  this.setState({
+    mode: '2'
+  })
 }
 
 handleDescribe =() => {
@@ -65,29 +65,30 @@ handleDescribe =() => {
 }
 
 handleChangeMode = () => {
-  let mode =0;
-    if (this.state.mode === 1)
-       mode = 2;
-    if (this.state.mode === 2)
-       mode = 1;
+  let mode = '';
+    if (this.state.mode === '1')
+       mode = '2';
+    if (this.state.mode === '2')
+       mode = '1';
     this.setState({mode})
 }
+
   render() {
-   
+   console.log(this.state.mode);
     return (
       <React.Fragment>
         <header className='titel'>
           <header className='central'>światła i znaki statków na morzu</header>
-          {this.state.mode === 1 && <div className="mode">tryb prezentacji</div>}
-          {this.state.mode === 2 && <div className="mode">tryb nauki</div>}
+          {this.state.mode === '1' && <div className="mode">tryb prezentacji</div>}
+          {this.state.mode === '2' && <div className="mode">tryb nauki</div>}
         </header>
-        {this.state.mode === 0 && <Dashboard aplicationMode = {this.aplicationMode}/>}
-        {this.state.mode === 1 && <LearningMode counter={this.state.counter} changeMode = {this.handleChangeMode} mode={this.state.mode} active={this.state.active} click={this.handleOnClickArrows} button={this.handleButton}/>}
-        {this.state.mode === 2 && <TestMode numbers = {this.state.numbers} changeMode = {this.handleChangeMode} active={this.state.active} handleOnClickAnswer = {this.handleOnClickAnswer} questionPicture={this.drawQuestion} picture={this.state.question} class={this.state.class} button={this.handleButton} describe={this.handleDescribe} switch = {this.state.describe}/>}
+        {this.state.mode === '0' && <Dashboard mode1 = {this.aplicationMode1} mode2 = {this.aplicationMode2}/>}
+        {this.state.mode === '1' && <LearningMode counter={this.state.counter} changeMode = {this.handleChangeMode} mode={this.state.mode} active={this.state.active} click={this.handleOnClickArrows} button={this.handleButton}/>}
+        {this.state.mode === '2' && <TestMode numbers = {this.state.numbers} changeMode = {this.handleChangeMode} active={this.state.active} handleOnClickAnswer = {this.handleOnClickAnswer} picture={this.state.question} button={this.handleButton} describe={this.handleDescribe} switch = {this.state.describe}/>}
         <footer>
          
-          {this.state.mode === 1 && <header className='right'><ChooseAnyPicture click={this.handleOnClickArrows}/></header>}
-          {this.state.mode === 2 && <NewTask drawQuestion = {this.drawQuestion}/>}
+          {this.state.mode === '1' && <header className='right'><ChooseAnyPicture click={this.handleOnClickArrows}/></header>}
+          {this.state.mode === '2' && <NewTask drawQuestion = {this.drawQuestion}/>}
           <p>&#169; 2021<a href='https://wp.jkunicki.pl' target='_blank'> Jerzy Kunicki</a></p> 
         </footer>
       </React.Fragment>
@@ -183,7 +184,7 @@ const NewTask = (props) => {
           <div className="cover"><img src='images/obrazy-500px-unnumbered/cover.jpg' alt='aa'/></div>
       </div>
       <div className='dashboard'>
-        <button name='learningMode' onClick = {props.aplicationMode}><p>tryb prezentacji</p></button><button name='testMode' onClick = {props.aplicationMode}><p>tryb nauki</p></button>
+        <button name='1' onClick={props.mode1}><p>tryb prezentacji</p></button><button name='2' onClick = {props.mode2}><p>tryb nauki</p></button>
         </div>
       </div>
     
